@@ -32,7 +32,7 @@ def main():
         data = json.load(f)
 
     for device in data:
-        flash_canbus(device['canbus_uuid'], f"{os.path.expanduser('~')}/voron-2-300/binaries/{device['name']}.bin", device['canbus_canbridge'], 10)
+        flash_canbus(device['canbus_uuid'], f"{os.path.expanduser('~')}/voron-2-300/binaries/{device['name']}.bin", device['canbridge'], 10)
 
 if __name__ == "__main__":
     main()
