@@ -8,14 +8,16 @@ with open(f"{os.path.expanduser('~')}/voron-2-300/config/printer.json") as f:
 
 for device in data:
     if device["canbridge"]:
-        startingDevices = set(os.listdir("/dev/serial/by-id/"))
-        
+        if os.path.exists("/dev/serial/by-id/"):
+            startingDevices = set(os.listdir("/dev/serial/by-id/"))
+        else:
+            startingDevices = set()
 
     print(f"canbus flash {device['name']} at {device['canbus_uuid']}")
     if device["canbridge"]:
-        time.sleep(20)
-        currentDevices = set(os.listdir("/dev/serial/by-id/"))
+        if os.path.exists("/dev/serial/by-id/"):
+            currentDevices = set(os.listdir("/dev/serial/by-id/"))
+        else:
+            currentDevices = set()
         print(currentDevices - startingDevices)
         print("usb flash")
-        
-
