@@ -1,12 +1,21 @@
 import json
 import os
+import time
 import subprocess
 
 with open(f"{os.path.expanduser('~')}/voron-2-300/config/printer.json") as f:
     data = json.load(f)
 
 for device in data:
+    if device["canbridge"]:
+        startingDevices = set(os.listdir("/dev/serial/by-id/"))
+        
+
     print(f"canbus flash {device['name']} at {device['canbus_uuid']}")
     if device["canbridge"]:
+        time.sleep(20)
+        currentDevices = set(os.listdir("/dev/serial/by-id/"))
+        print(currentDevices - startingDevices)
         print("usb flash")
+        
 
