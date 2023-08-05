@@ -13,14 +13,18 @@ def flash_canbus(uuid, payload, canbridge=False, maxTries=10):
             startingDevices = set()
     # Flash canbus module
     print(f"canbus flash device at {uuid} with {payload}")
+    print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-i", "can0", "-f", payload, "-u", uuid].join(" "))
+    # subprocess.run(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-i", "can0", "-f", payload, "-u", uuid])
     # Flash usb if it is a canbridge
     if canbridge:
         # retry looking for device until timeout
         for i in range(maxTries):
-                if os.path.exists("/dev/"):
-                    currentDevices = set(os.listdir("/dev/"))
+                if os.path.exists("/dev/serial/by-id/"):
+                    currentDevices = set(os.listdir("/dev/serial/by-id/"))
                     for device in currentDevices - startingDevices:
                         print(f"usb flash {device} with {payload}")
+                        print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-f", payload, "-d", device].join(" "))
+                        # subprocess.run(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-f", payload, "-d", device])
                     break
                 else:
                     # Sleep and then retry to see if bridge comes up
