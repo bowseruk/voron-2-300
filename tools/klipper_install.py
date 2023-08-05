@@ -13,7 +13,7 @@ def flash_canbus(uuid, payload, canbridge=False, maxTries=10):
             startingDevices = set()
     # Flash canbus module
     print(f"canbus flash device at {uuid} with {payload}")
-    print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-i", "can0", "-f", payload, "-u", uuid].join(" "))
+    print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-i", "can0", "-f", payload, "-u", uuid])
     # subprocess.run(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-i", "can0", "-f", payload, "-u", uuid])
     # Flash usb if it is a canbridge
     if canbridge:
@@ -23,7 +23,7 @@ def flash_canbus(uuid, payload, canbridge=False, maxTries=10):
                     currentDevices = set(os.listdir("/dev/serial/by-id/"))
                     for device in currentDevices - startingDevices:
                         print(f"usb flash {device} with {payload}")
-                        print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-f", payload, "-d", device].join(" "))
+                        print(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-f", payload, "-d", device])
                         # subprocess.run(["python3", f"{os.path.expanduser('~')}/katapult/scripts/flashtool.py", "-f", payload, "-d", device])
                     break
                 else:
