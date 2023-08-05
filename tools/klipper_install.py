@@ -15,9 +15,12 @@ for device in data:
 
     print(f"canbus flash {device['name']} at {device['canbus_uuid']}")
     if device["canbridge"]:
-        if os.path.exists("/dev/serial/by-id/"):
-            currentDevices = set(os.listdir("/dev/"))
-        else:
-            currentDevices = set()
-        print(currentDevices - startingDevices)
-        print("usb flash")
+        for i in range(10):
+            if os.path.exists("/dev/"):
+                currentDevices = set(os.listdir("/dev/"))
+                for device in currentDevices - startingDevices:
+                    print(f"usb flash {device}")
+                return
+            else:
+                time.sleep(10)
+
