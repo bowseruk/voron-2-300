@@ -2,16 +2,28 @@
     {
         "name": "sb2040",
         "canbus_uuid": "2511c78bb626",
-        "canbridge": false
+        "canbridge": false,
+        "auto_update_klipper": true,
+        "auto_update_katapult": true,
+        "katapult_version": "",
+        "klipper_version": ""
     },
     {
         "name": "pitb",
         "canbus_uuid": "261931fc8408",
-        "canbridge": false
+        "canbridge": false,
+        "auto_update_klipper": true,
+        "auto_update_katapult": true,
+        "katapult_version": "",
+        "klipper_version": ""
     },
     {
         "name": "octopus_pro_f429",
         "canbus_uuid": "d5e7f86ae5ab",
-        "canbridge": true
+        "canbridge": true,
+        "auto_update_klipper": true,
+        "auto_update_katapult": true,
+        "katapult_version": "",
+        "klipper_version": ""
     }
 ]
