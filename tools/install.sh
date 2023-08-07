@@ -11,4 +11,4 @@ printerdata="~/printer_data"
 cp "${repo}/network/can0" ${network}
 
 # Setup the printer config files
-cp "${repo}/printer_data/* ${printerdata}
+cp "${repo}/printer_data/*" ${printerdata}
