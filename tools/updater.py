@@ -73,13 +73,12 @@ def update_klipper(name):
     return True
 
 def flash_device(uuid, payload, connection, maxTries=10):
-    match connection:
-        case "canbus":
-            flash_canbus(uuid, payload)
-        case "usb":
-            flash_usb(uuid, payload)
-        case "canbridge":
-            flash_canbridge(uuid, payload, maxTries)
+    if connection == "canbus":
+        flash_canbus(uuid, payload)
+    elif connection == "usb":
+        flash_usb(uuid, payload)
+    elif connection == "canbridge":
+        flash_canbridge(uuid, payload, maxTries)
 
 
 def flash_canbridge(uuid, payload, maxTries=10):
