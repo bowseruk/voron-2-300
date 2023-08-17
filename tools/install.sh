@@ -19,3 +19,4 @@ cp ${printerdata}/config/* ${repo}/config/printer_data/backup/${backupfolder}
 
 # Setup the printer config files
 cp ${repo}/config/printer_data/install/printer.cfg ${printerdata}/config
+cp ${repo}/config/printer_data/moonraker/moonraker.cfg ${printerdata}/config
