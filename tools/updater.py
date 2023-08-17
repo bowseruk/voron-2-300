@@ -72,6 +72,7 @@ def update_klipper(name):
     )
     return True
 
+
 def flash_device(uuid, payload, connection, maxTries=10):
     if connection == "canbus":
         flash_canbus(uuid, payload)
@@ -96,7 +97,7 @@ def flash_canbridge(uuid, payload, maxTries=10):
             if not (currentDevices - startingDevices):
                 continue
             for device in currentDevices - startingDevices:
-                flash_usb(device, payload)
+                flash_usb(f"/dev/serial/by-id/{device}", payload)
             break
         else:
             # Sleep and then retry to see if bridge comes up
@@ -182,6 +183,7 @@ def main(klipper=False, katapult=False):
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--katapult", help="Update Katapult", action="store_true")
     parser.add_argument("-k", "--klipper", help="Update Klipper", action="store_true")

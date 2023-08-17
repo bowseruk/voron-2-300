@@ -6,7 +6,7 @@
         "auto_update_klipper": true,
         "auto_update_katapult": true,
         "katapult_version": "v0.0.1-57-gabd15452",
-        "klipper_version": "v0.11.0-257-ged66982b"
+        "klipper_version": "v0.11.0-267-g01ed8096"
     },
     {
         "name": "pitb",
@@ -15,7 +15,7 @@
         "auto_update_klipper": true,
         "auto_update_katapult": true,
         "katapult_version": "v0.0.1-57-gabd15452",
-        "klipper_version": "v0.11.0-257-ged66982b"
+        "klipper_version": "v0.11.0-267-g01ed8096"
     },
     {
         "name": "octopus_pro_f429",
@@ -24,6 +24,6 @@
         "auto_update_klipper": true,
         "auto_update_katapult": true,
         "katapult_version": "v0.0.1-57-gabd15452",
-        "klipper_version": "v0.11.0-257-ged66982b"
+        "klipper_version": "v0.11.0-267-g01ed8096"
     }
 ]
