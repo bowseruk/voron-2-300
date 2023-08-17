@@ -186,4 +186,9 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--katapult", help="Update Katapult", action="store_true")
     parser.add_argument("-k", "--klipper", help="Update Klipper", action="store_true")
     args = parser.parse_args()
-    main(args.klipper, args.update_katapult)
+    klipper, katapult = False, False
+    if args.klipper:
+        klipper = True
+    if args.katapult:
+        katapult = True
+    main(klipper, katapult)
