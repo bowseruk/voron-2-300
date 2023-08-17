@@ -72,6 +72,15 @@ def update_klipper(name):
     )
     return True
 
+def flash_device(uuid, payload, connection, maxTries=10):
+    match connection:
+        case "canbus":
+            flash_canbus(uuid, payload)
+        case "usb":
+            flash_usb(uuid, payload)
+        case "canbridge":
+            flash_canbridge(uuid, payload, maxTries)
+
 
 def flash_canbridge(uuid, payload, maxTries=10):
     # Check for exisitting serial devices
@@ -155,19 +164,19 @@ def main(update_klipper=False, update_katapult=False):
         if update_katapult:
             update_katapult(device["name"])
             if device["auto_update_katapult"]:
-                flash_canbus(
+                flash_device(
                     device["canbus_uuid"],
                     f"{os.path.expanduser('~')}/voron-2-300/binaries/katapult/{device['name']}_deployer.bin",
-                    device["canbridge"],
+                    device["connection"],
                     10,
                 )
         if update_klipper:
             update_klipper(device["name"])
             if device["auto_update_klipper"]:
-                flash_canbus(
+                flash_device(
                     device["canbus_uuid"],
                     f"{os.path.expanduser('~')}/voron-2-300/binaries/klipper/{device['name']}.bin",
-                    device["canbridge"],
+                    device["connection"],
                     10,
                 )
 
