@@ -155,12 +155,12 @@ def canbus_reset_to_bootloader(uuid):
 
 
 ## This function opens a json
-def main(update_klipper=False, update_katapult=False):
+def main(klipper=False, katapult=False):
     with open(f"{os.path.expanduser('~')}/voron-2-300/config/printer.json") as f:
         data = json.load(f)
 
     for device in data:
-        if update_katapult:
+        if katapult:
             update_katapult(device["name"])
             if device["auto_update_katapult"]:
                 flash_device(
@@ -169,7 +169,7 @@ def main(update_klipper=False, update_katapult=False):
                     device["connection"],
                     10,
                 )
-        if update_klipper:
+        if klipper:
             update_klipper(device["name"])
             if device["auto_update_klipper"]:
                 flash_device(
