@@ -181,4 +181,11 @@ def main(update_klipper=False, update_katapult=False):
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--katapult", help="Update Katapult")
+    parser.add_argument("--klipper", help="Update Klipper")
+    args = parser.parse_args()
+    if args.verbosity:
+        print("verbosity turned on")
+    main(args.klipper, args.update_katapult)
