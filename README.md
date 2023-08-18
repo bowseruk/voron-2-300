@@ -118,6 +118,12 @@ The following resources were important for this project.
 
 - [Voron Design](https://vorondesign.com/voron2.4) for creating a great printer.
 
+- [Klipper](https://www.klipper3d.org/) documentation has helped me a lot.
+
+- [Katapult]()
+
+- [Fluidd]()
+
 - [Formbot](https://www.formbot3d.com/collections/voron-24)
 
 - [2020 extrusion clips]()
