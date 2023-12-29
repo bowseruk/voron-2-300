@@ -4,7 +4,7 @@
 
 ## Description
 
-This Repo is for keeping all the details of my Voron 2.4 300 mm.
+This Repo is for keeping all the details of my Voron 2.4r2 300 mm.
 
 The project had the following aims:
 
