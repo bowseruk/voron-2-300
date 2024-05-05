@@ -73,16 +73,16 @@ def update_klipper(name):
     return True
 
 
-def flash_device(uuid, payload, connection, maxTries=10):
+def flash_device(uuid, payload, connection, maxTries=10, bootloader=None):
     if connection == "canbus":
         flash_canbus(uuid, payload)
     elif connection == "usb":
         flash_usb(uuid, payload)
     elif connection == "canbridge":
-        flash_canbridge(uuid, payload, maxTries)
+        flash_canbridge(uuid, payload, bootloader, maxTries)
 
 
-def flash_canbridge(uuid, payload, maxTries=10):
+def flash_canbridge(uuid, payload, bootloader=None, maxTries=10):
     # Check for exisitting serial devices
     if os.path.exists("/dev/serial/by-id/"):
         startingDevices = set(os.listdir("/dev/serial/by-id/"))
@@ -91,17 +91,21 @@ def flash_canbridge(uuid, payload, maxTries=10):
     # Enter bootloader
     canbus_reset_to_bootloader(uuid)
     # retry looking for device until timeout
-    for i in range(maxTries):
-        if os.path.exists("/dev/serial/by-id/"):
-            currentDevices = set(os.listdir("/dev/serial/by-id/"))
-            if not (currentDevices - startingDevices):
-                continue
-            for device in currentDevices - startingDevices:
-                flash_usb(f"/dev/serial/by-id/{device}", payload)
-            break
-        else:
-            # Sleep and then retry to see if bridge comes up
-            time.sleep(10)
+    targets = [payload]
+    if bootloader is not None:
+        targets =  [bootloader] + targets
+    for target in targets:
+        for i in range(maxTries):
+            if os.path.exists("/dev/serial/by-id/"):
+                currentDevices = set(os.listdir("/dev/serial/by-id/"))
+                if not (currentDevices - startingDevices):
+                    continue
+                for device in currentDevices - startingDevices:
+                    flash_usb(f"/dev/serial/by-id/{device}", target)
+                    break
+            else:
+                # Sleep and then retry to see if bridge comes up
+                time.sleep(10)
 
 
 def flash_usb(uuid, payload):
@@ -169,6 +173,7 @@ def main(klipper=False, katapult=False):
                     f"{os.path.expanduser('~')}/voron-2-300/binaries/katapult/{device['name']}_deployer.bin",
                     device["connection"],
                     10,
+                    f"{os.path.expanduser('~')}/voron-2-300/binaries/klipper/{device['name']}.bin" if device["connection"] == "canbridge" else None,
                 )
         if klipper:
             update_klipper(device["name"])
@@ -178,6 +183,7 @@ def main(klipper=False, katapult=False):
                     f"{os.path.expanduser('~')}/voron-2-300/binaries/klipper/{device['name']}.bin",
                     device["connection"],
                     10,
+                    None,
                 )
 
 
