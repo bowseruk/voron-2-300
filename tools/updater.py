@@ -102,7 +102,7 @@ def flash_canbridge(uuid, payload, bootloader=None, maxTries=10):
                     continue
                 for device in currentDevices - startingDevices:
                     flash_usb(f"/dev/serial/by-id/{device}", target)
-                    break
+                break
             else:
                 # Sleep and then retry to see if bridge comes up
                 time.sleep(10)
