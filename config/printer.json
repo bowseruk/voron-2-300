@@ -1,7 +1,7 @@
 [
     {
-        "name": "sb2040",
-        "canbus_uuid": "2511c78bb626",
+        "name": "sb2240",
+        "canbus_uuid": "f69da94baa27",
         "connection": "canbus",
         "auto_update_klipper": true,
         "auto_update_katapult": true,
